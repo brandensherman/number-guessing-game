@@ -12,7 +12,6 @@ body {
   display: flex;
   font-family: 'Lato', sans-serif;
   min-height: 60vh;
-  text-transform: uppercase;
 }
 
 .container {
@@ -27,6 +26,7 @@ body {
 h1 {
   letter-spacing: 0.5px;
   margin-bottom: 1.2rem;
+  text-transform: uppercase;
 }
 
 h3 {
@@ -52,7 +52,7 @@ li {
   list-style: none;
 }
 
-p {
+.guess-text {
   margin-bottom: 1.5rem;
 }
 
@@ -95,4 +95,41 @@ input[type='text'] {
 
 input[type='text']:focus {
   outline: 0;
+}
+
+/* Modal */
+
+.rules-btn {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+
+.rules {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #333;
+
+  min-height: 100vh;
+  width: 300px;
+  padding: 20px;
+  line-height: 1.5;
+  transform: translateX(-400px);
+  transition: transform 0.9s ease-in-out;
+}
+
+.rules p {
+  margin-bottom: 1rem;
+}
+
+.rules h2 {
+  display: inline-block;
+  border-bottom: 2px solid #fff;
+  margin-bottom: 0.7rem;
+  text-transform: uppercase;
+}
+
+.rules.show {
+  transform: translateX(0);
 }

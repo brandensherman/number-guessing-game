@@ -4,6 +4,8 @@ const textInput = document.querySelector('.text-input');
 const submitBtn = document.querySelector('.btn-submit');
 const resetBtn = document.querySelector('.btn-reset');
 const hintBtn = document.querySelector('.btn-hint');
+const rulesBtn = document.getElementById('rules-btn');
+const closeBtn = document.getElementById('close-btn');
 
 function generateWinningNumber() {
   return Math.ceil(Math.random() * 100);
@@ -13,8 +15,8 @@ function shuffle(arr) {
   let length = arr.length;
 
   while (length) {
-    i = Math.floor(Math.random() * length--);
-    temp = arr[length];
+    let i = Math.floor(Math.random() * length--);
+    let temp = arr[length];
     arr[length] = arr[i];
     arr[i] = temp;
   }
@@ -36,16 +38,22 @@ class Game {
     return Math.abs(this.playersGuess - this.winningNumber);
   }
 
-  isLower() {
-    return this.playersGuess < this.winningNumber;
-  }
-
   playersGuessSubmission(num) {
+    let numbers = '123456789';
+
+    if (numbers.includes(num[0])) {
+      num = +num;
+    }
+
     if (this.gameWon === true) {
       return;
     } else if (typeof num !== 'number') {
+      guessText.innerText = 'That is an invalid guess.';
+      textInput.value = '';
       throw 'That is an invalid guess.';
     } else if (num < 1 || num > 100) {
+      guessText.innerText = 'That is an invalid guess.';
+      textInput.value = '';
       throw 'That is an invalid guess.';
     } else {
       this.playersGuess = num;
@@ -110,10 +118,12 @@ function newGame() {
 function playGame() {
   const game = newGame();
   let hintCount = 0;
+
   // Event Listeners
   submitBtn.addEventListener('click', e => {
     e.preventDefault();
-    game.playersGuessSubmission(+textInput.value);
+
+    game.playersGuessSubmission(textInput.value);
     textInput.value = '';
   });
 
@@ -123,6 +133,7 @@ function playGame() {
 
   hintBtn.addEventListener('click', e => {
     e.preventDefault();
+
     if (hintCount < 1) {
       hintCount++;
       guessText.innerText = game.hint.join(' ');
@@ -131,3 +142,7 @@ function playGame() {
 }
 
 playGame();
+
+// Rules Menu
+rulesBtn.addEventListener('click', () => rules.classList.add('show'));
+closeBtn.addEventListener('click', () => rules.classList.remove('show'));
