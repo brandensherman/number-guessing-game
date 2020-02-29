@@ -1,3 +1,4 @@
+// DOM Elements
 const previousGuess = document.querySelectorAll('.prev-guess');
 const guessText = document.querySelector('.guess-text');
 const textInput = document.querySelector('.text-input');
@@ -7,6 +8,11 @@ const hintBtn = document.querySelector('.btn-hint');
 const rulesBtn = document.getElementById('rules-btn');
 const closeBtn = document.getElementById('close-btn');
 
+// Rules Menu
+rulesBtn.addEventListener('click', () => rules.classList.add('show'));
+closeBtn.addEventListener('click', () => rules.classList.remove('show'));
+
+// Game App
 function generateWinningNumber() {
   return Math.ceil(Math.random() * 100);
 }
@@ -142,7 +148,3 @@ function playGame() {
 }
 
 playGame();
-
-// Rules Menu
-rulesBtn.addEventListener('click', () => rules.classList.add('show'));
-closeBtn.addEventListener('click', () => rules.classList.remove('show'));
